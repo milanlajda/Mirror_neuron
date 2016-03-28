@@ -39,6 +39,9 @@ print("Output of JOY after training: ")
 print (l1)
 
 
+print("Output of JOY with new data: ")
+
+
 def joy(annoutput):
     if annoutput == 1:
         print("TEST: It's JOY!")
