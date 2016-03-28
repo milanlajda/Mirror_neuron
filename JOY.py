@@ -8,10 +8,35 @@ def nonlin(x,deriv=False):
         return 1/(1+np.exp(-x))
 
 # input dataset
-x = np.array([0, 0.2, 0.8, 1.4])
+x = np.array([ [0], [0.2], [0.8], [1.4] ])
 
 # output dataset
-y = np.array([1, 1, 1, 1, ])
+y = np.array([[1, 1, 1, 1]]).T
+
+# seed random numbers to make calculation
+np.random.seed(1)
+
+# initialize weights randomly with mean 0
+syn0 = 2*np.random.random((1, 1)) - 1
+
+for inter in range(10000):
+
+    # forward propagation
+    l0 = x
+    l1 = nonlin(np.dot(l0, syn0))
+
+    # error calculation
+    l1_error = y - l1
+
+    # multiply how much we missed by the
+    # slope of the sigmoid at the values in l1
+    l1_delta = l1_error * nonlin(l1, True)
+
+    # update weights
+    syn0 += np.dot(l0.T, l1_delta)
+
+print("Output of JOY after training: ")
+print (l1)
 
 
 def joy(annoutput):
