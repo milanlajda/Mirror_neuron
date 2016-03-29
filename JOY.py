@@ -22,12 +22,19 @@ y = np.array([[1, 1, 1, 1,
 # seed random numbers to make calculation
 np.random.seed(1)
 
-# initialize weights randomly with mean 0
+# initialize weights of layer 0 randomly with mean 0
 syn0 = 2*np.random.random((1, 1)) - 1
 
+# initialize weights of layer 1 randomly with mean 0
+syn1 = 2*np.random.random((1, 1)) - 1
+
+# # initialize weights of layer 2 randomly with mean 0
+# syn0 = 2*np.random.random((1, 1)) - 1
+
+# ################################ layer1
 for inter in range(10000):
 
-    # forward propagation
+    # forward propagation 1 (ANN guesses the answers)
     l0 = x
     l1 = nonlin(np.dot(l0, syn0))
 
@@ -41,30 +48,53 @@ for inter in range(10000):
     # update weights
     syn0 += np.dot(l0.T, l1_delta)
 
-# print("Output of JOY after training: ")
-# print (l1)
+# print("Output of l1 after training: ")
+# print(l1)
+
+# ################################ layer2
+for inter1 in range(10000):
+
+    # forward propagation 2 (ANN guesses the answers)
+    l2 = nonlin(np.dot(l1, syn1))
+
+    # error calculation
+    l2_error = y - l2
+
+    # multiply how much we missed by the
+    # slope of the sigmoid at the values in l1
+    l2_delta = l2_error * nonlin(l2, True)
+
+    # update weights
+    syn1 += np.dot(l1.T, l2_delta)
+
+# print("Output of l2 after training: ")
+# print(l2)
 
 
 # test the ANN with nontraining data
 nontrainingdata1 = np.array([ [0.1], [0.10], [0.15], [0.22] ])
-test = nonlin(np.dot(nontrainingdata1, syn0))
+test1s1 = nonlin(np.dot(nontrainingdata1, syn0))
+test1s2 = nonlin(np.dot(test1s1, syn1))
 print("Output of JOY with JOY data: ")
-print(test)
+print(test1s2)
 
 # nontrainingdata2 = np.array([ [0.26], [0.30], [0.41], [0.44] ])
-# test2 = nonlin(np.dot(nontrainingdata2, syn0))
+# test2s1 = nonlin(np.dot(nontrainingdata2, syn0))
+# test2s2 = nonlin(np.dot(test2s1, syn1))
 # print("Output of JOY with SADNESS data: ")
-# print(test2)
+# print(test2s2)
 #
 # nontrainingdata3 = np.array([ [0.52], [0.62], [0.69], [0.72] ])
-# test3 = nonlin(np.dot(nontrainingdata3, syn0))
+# test3s1 = nonlin(np.dot(nontrainingdata3, syn0))
+# test3s2 = nonlin(np.dot(test3s1, syn1))
 # print("Output of JOY with ANGER data: ")
-# print(test3)
+# print(test3s2)
 #
 # nontrainingdata4 = np.array([ [0.78], [0.8], [0.92], [0.98] ])
-# test4 = nonlin(np.dot(nontrainingdata4, syn0))
+# test4s1 = nonlin(np.dot(nontrainingdata4, syn0))
+# test4s2 = nonlin(np.dot(test4s1, syn1))
 # print("Output of JOY with with FEAR data: ")
-# print(test4)
+# print(test4s2)
 
 def joy(annoutput):
     if annoutput == 1:
