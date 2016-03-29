@@ -39,8 +39,16 @@ print("Output of JOY after training: ")
 print (l1)
 
 
-print("Output of JOY with new data: ")
+# test the ANN with nontraining data
+nontrainingdata1 = np.array([ [0.25], [0.4], [1.15], [1.3] ])
+test = nonlin(np.dot(nontrainingdata1, syn0))
+print("Output of JOY with new data between 0 and 1.4: ")
+print(test)
 
+nontrainingdata2 = np.array([ [2], [3], [4], [5] ])
+test2 = nonlin(np.dot(nontrainingdata2, syn0))
+print("Output of JOY with new data > 1.4: ")
+print(test2)
 
 def joy(annoutput):
     if annoutput == 1:
