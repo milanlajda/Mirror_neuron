@@ -1,5 +1,6 @@
 
-# Pattern is recognized when
+# In the matrix in each array first two and last value don't matter
+#  Pattern is recognized when there is one "0" out of value 3, 4 and 5.
 
 import numpy as np
 
