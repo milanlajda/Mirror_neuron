@@ -1,5 +1,7 @@
-import numpy as np
 
+# Pattern is recognized when
+
+import numpy as np
 
 # sigmoid function
 def nonlin(x,deriv=False):
@@ -8,22 +10,22 @@ def nonlin(x,deriv=False):
         return 1/(1+np.exp(-x))
 
 # input dataset
-x = np.array([ [0, 0, 1],
-               [0, 1, 1],
-               [1, 0, 1],
-               [1, 1, 1]])
+x = np.array([ [0, 0, 1, 0, 0, 1],
+               [0, 1, 0, 0, 1, 1],
+               [1, 0, 1, 1, 0, 1],
+               [1, 1, 1, 1, 1, 1]])
 
 # output dataset
-y = np.array([[0],
+y = np.array([[1],
                [1],
-               [1],
+               [0],
                [0]])
 
 # seed random numbers to make calculation
 np.random.seed(1)
 
 # initialize weights randomly with mean 0
-syn0 = 2*np.random.random((3, 4)) - 1
+syn0 = 2*np.random.random((6, 4)) - 1
 syn1 = 2*np.random.random((4, 1)) - 1
 
 
@@ -38,8 +40,8 @@ for j in range(60000):
     # error calculation
     l2_error = y - l2
 
-    if (j% 10000) == 0:
-        print("Error:" + str(np.mean(np.abs(l2_error))))
+    # if (j% 10000) == 0:
+    #     print("Error:" + str(np.mean(np.abs(l2_error))))
 
 
 # in what direction is the target value?
@@ -58,7 +60,7 @@ for j in range(60000):
     syn0 += l0.T.dot(l1_delta)
     syn1 += l1.T.dot(l2_delta)
 
-print("Output of l2 after training: ")
+print("Output of l2 in JOY after training: ")
 print(l2)
 
 # # ################################ layer2
@@ -82,11 +84,11 @@ print(l2)
 
 
 # test the ANN with nontraining data
-nontrainingdata1 = np.array([ [0.1, 0.09, 0.20], [0.10, 0.9, 0.7], [0.15, 0.247, 0.198], [0.22, 0.23, 0.07] ])
-test1s1 = nonlin(np.dot(nontrainingdata1, syn0))
-# test1s2 = nonlin(np.dot(test1s1, syn1))
-print("Output of JOY with JOY data: ")
-print(test1s1)
+# nontrainingdata1 = np.array([ [0.1, 0.09, 0.20], [0.10, 0.9, 0.7], [0.15, 0.247, 0.198], [0.22, 0.23, 0.07] ])
+# test1s1 = nonlin(np.dot(nontrainingdata1, syn0))
+# # test1s2 = nonlin(np.dot(test1s1, syn1))
+# print("Output of JOY with JOY data: ")
+# print(test1s1)
 
 # nontrainingdata2 = np.array([ [0.26], [0.30], [0.41], [0.44] ])
 # test2s1 = nonlin(np.dot(nontrainingdata2, syn0))
