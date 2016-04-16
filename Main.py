@@ -1,5 +1,5 @@
 from JOY import joy
-from SADNESS import sadness
+# from SADNESS import sadness
 # from ANGER import anger
 # from FEAR import fear
 
@@ -7,7 +7,7 @@ def main():
 
     # input is JOY
     joy(1)
-    sadness(1)
+    # sadness(1)
     # anger(1)
     # fear(1)
 
