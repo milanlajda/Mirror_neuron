@@ -1,24 +1,24 @@
-from JOY import joy
-# from SADNESS import sadness
-from ANGER import anger
-from FEAR import fear
+from ENCAPSULATION import feedthedata
+
+import numpy as np
 
 def main():
 
-    # input is JOY
-    joy([0, 1, 0, 0, 0, 0])
-    # sadness(1)
-    anger([1, 1, 1, 0, 0, 0])
-    fear([0, 0, 0, 0, 0, 0])
+# test data that ANN should recognize as JOY
+    test1 = np.array([0, 1, 0, 0, 0, 0])
+
+# test data that ANN should recognize as ANGER
+    test2 = np.array([1, 1, 1, 0, 0, 0])
+
+# test data that ANN should recognize as FEAR
+    test3 = np.array([0, 0, 0, 0, 0, 0])
+
+    feedthedata(test1)
+    feedthedata(test2)
+    feedthedata(test3)
 
 
 
-
-
-
-    joy(input)
-    anger(input)
-    fear(input)
 
 
 if __name__ == "__main__":

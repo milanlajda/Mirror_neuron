@@ -91,15 +91,15 @@ for j in range(60000):
 
 
 
-def fear(outsidedata):
-    print("TEST: It's FEAR with outside output!")
+def fear(data):
+    # print("TEST: It's FEAR with outside output!")
 
-    test1s1 = nonlin(np.dot(outsidedata, syn0))
+    test1s1 = nonlin(np.dot(data, syn0))
     test1s2 = nonlin(np.dot(test1s1, syn1))
     test1s3 = nonlin(np.dot(test1s2, syn2))
 
-    print("Output of FEAR with outside FEAR data: ")
-    print(test1s3)
+    # print("Output of FEAR with outside FEAR data: ")
+    # print(test1s3)
     return test1s3
 
 

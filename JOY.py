@@ -89,15 +89,15 @@ for j in range(60000):
 # print("Output of JOY with nontraining data: ")
 # print(test1s3)
 
-def joy(outsidedata):
-    print("TEST: It's JOY with outside output!")
+def joy(data):
+    # print("TEST: It's JOY with outside output!")
 
-    test1s1 = nonlin(np.dot(outsidedata, syn0))
+    test1s1 = nonlin(np.dot(data, syn0))
     test1s2 = nonlin(np.dot(test1s1, syn1))
     test1s3 = nonlin(np.dot(test1s2, syn2))
 
-    print("Output of JOY with outside JOY data: ")
-    print(test1s3)
+    # print("Output of JOY with outside JOY data: ")
+    # print(test1s3)
     return test1s3
 
 
