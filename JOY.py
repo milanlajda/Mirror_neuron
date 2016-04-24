@@ -1,6 +1,5 @@
 
-# In the matrix in each array first two and last value don't matter
-#  Pattern is recognized when there is one "1" out of value 3, 4 and 5.
+#  Pattern is recognized when it begins with 0 1 0
 
 import numpy as np
 
@@ -11,10 +10,10 @@ def nonlin(x,deriv=False):
         return 1/(1+np.exp(-x))
 
 # input dataset
-x = np.array([ [0, 1, 1, 0, 0, 1],
-               [1, 0, 0, 0, 1, 0],
-               [0, 0, 0, 0, 0, 0],
-               [1, 1, 1, 1, 1, 1]])
+x = np.array([ [0, 1, 0, 1, 0, 1],
+               [0, 1, 0, 1, 0, 1],
+               [1, 1, 1, 1, 0, 1],
+               [0, 0, 0, 1, 0, 1]])
 
 # output dataset
 y = np.array([[1],
@@ -49,14 +48,14 @@ for j in range(60000):
 
 # in what direction is the target value?
 # were we really sure? if so, don't change too much.
-    l3_delta = l3_error*nonlin(l3, deriv=True)
+    l3_delta = l3_error * nonlin(l3, deriv=True)
 
 # how much did each l1 value contribute to l2 error (according to the weights)?
     l2_error = l3_delta.dot(syn2.T)
 
 # in what direction is the target value?
 # were we really sure? if so, don't change too much.
-    l2_delta = l2_error*nonlin(l2, deriv=True)
+    l2_delta = l2_error * nonlin(l2, deriv=True)
 
 # how much did each l1 value contribute to l2 error (according to the weights)?
     l1_error = l2_delta.dot(syn1.T)
@@ -67,7 +66,7 @@ for j in range(60000):
 
 # in what direction is the target l1?
 # were we really sure? if so don't change much
-    l1_delta = l1_error*nonlin(l1, deriv=True)
+    l1_delta = l1_error * nonlin(l1, deriv=True)
 
 
 # update weights
@@ -75,46 +74,42 @@ for j in range(60000):
     syn1 += l1.T.dot(l2_delta)
     syn2 += l2.T.dot(l3_delta)
 
-print("Output of l2 in JOY after training: ")
-print(l3)
+# print("Output of l2 in JOY after training: ")
+# print(l3)
 
 
-# test the ANN with nontraining data
-nontrainingdata1 = np.array([ [1, 1, 1, 0, 0, 0],
-                              [0, 1, 1, 0, 0, 1],
-                              [1, 1, 0, 1, 1, 1],
-                              [0, 0, 1, 0, 1, 0]])
-test1s1 = nonlin(np.dot(nontrainingdata1, syn0))
-test1s2 = nonlin(np.dot(test1s1, syn1))
-test1s3 = nonlin(np.dot(test1s2, syn2))
-print("Output of JOY with JOY data: ")
-print(test1s3)
+# # test the ANN with nontraining data
+# nontrainingdata1 = np.array([ [1, 0, 1, 0, 1, 0],
+#                               [0, 1, 0, 0, 0, 1],
+#                               [0, 1, 0, 1, 1, 1],
+#                               [0, 0, 1, 0, 1, 0]])
+# test1s1 = nonlin(np.dot(nontrainingdata1, syn0))
+# test1s2 = nonlin(np.dot(test1s1, syn1))
+# test1s3 = nonlin(np.dot(test1s2, syn2))
+# print("Output of JOY with nontraining data: ")
+# print(test1s3)
+
+def joy(outsidedata):
+    print("TEST: It's JOY with outside output!")
+
+    test1s1 = nonlin(np.dot(outsidedata, syn0))
+    test1s2 = nonlin(np.dot(test1s1, syn1))
+    test1s3 = nonlin(np.dot(test1s2, syn2))
+
+    print("Output of JOY with outside JOY data: ")
+    print(test1s3)
+    return test1s3
 
 
 
 
 
-# nontrainingdata2 = np.array([ [0.26], [0.30], [0.41], [0.44] ])
-# test2s1 = nonlin(np.dot(nontrainingdata2, syn0))
-# test2s2 = nonlin(np.dot(test2s1, syn1))
-# print("Output of JOY with SADNESS data: ")
-# print(test2s2)
-#
-# nontrainingdata3 = np.array([ [0.52], [0.62], [0.69], [0.72] ])
-# test3s1 = nonlin(np.dot(nontrainingdata3, syn0))
-# test3s2 = nonlin(np.dot(test3s1, syn1))
-# print("Output of JOY with ANGER data: ")
-# print(test3s2)
-#
-# nontrainingdata4 = np.array([ [0.78], [0.8], [0.92], [0.98] ])
-# test4s1 = nonlin(np.dot(nontrainingdata4, syn0))
-# test4s2 = nonlin(np.dot(test4s1, syn1))
-# print("Output of JOY with with FEAR data: ")
-# print(test4s2)
 
-def joy(annoutput):
-    if annoutput == 1:
-        print("TEST: It's JOY!")
 
-    else:
-        print("TEST: It's not JOY")
+
+
+
+
+
+
+
