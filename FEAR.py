@@ -30,10 +30,9 @@ syn1 = 2*np.random.random((4, 4)) - 1
 syn2 = 2*np.random.random((4, 1)) - 1
 
 
-# ################################ layer1
 for j in range(60000):
 
-    # forward propagation 1 (ANN guesses the answers)
+    # forward propagation (ANN guesses the answers)
     l0 = x
     l1 = nonlin(np.dot(l0, syn0))
     l2 = nonlin(np.dot(l1, syn1))
@@ -41,9 +40,6 @@ for j in range(60000):
 
     # error calculation
     l3_error = y - l3
-
-    # if (j% 10000) == 0:
-    #     print("Error:" + str(np.mean(np.abs(l2_error))))
 
 
 # in what direction is the target value?
@@ -60,7 +56,7 @@ for j in range(60000):
 # how much did each l1 value contribute to l2 error (according to the weights)?
     l1_error = l2_delta.dot(syn1.T)
 
-# in what direction is the target l1?
+# in what direction is the target l2?
 # were we really sure? if so don't change much
     l2_delta = l2_error * nonlin(l2, deriv=True)
 
@@ -74,8 +70,6 @@ for j in range(60000):
     syn1 += l1.T.dot(l2_delta)
     syn2 += l2.T.dot(l3_delta)
 
-# print("Output of l3 in FEAR after training: ")
-# print(l3)
 
 
 # test the ANN with nontraining data
@@ -90,16 +84,13 @@ for j in range(60000):
 # print(test1s3)
 
 
-
+# taked the outside data and uses the trained network
 def fear(data):
-    # print("TEST: It's FEAR with outside output!")
 
     test1s1 = nonlin(np.dot(data, syn0))
     test1s2 = nonlin(np.dot(test1s1, syn1))
     test1s3 = nonlin(np.dot(test1s2, syn2))
 
-    # print("Output of FEAR with outside FEAR data: ")
-    # print(test1s3)
     return test1s3
 
 
